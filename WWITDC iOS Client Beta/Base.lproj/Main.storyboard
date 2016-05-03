@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Dynamic Splash Image View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ITDCDynamicSplashImageViewController" customModule="WWITDC_iOS_Client_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="redraw" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WnS-IP-iw2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bra-vG-iaz">
+                                <rect key="frame" x="524" y="20" width="56" height="28"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="2" maxX="8" maxY="2"/>
+                                <state key="normal" title="跳过">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="segueToMain" destination="BYZ-38-t0r" eventType="touchUpInside" id="k75-Dn-GbT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="WnS-IP-iw2" secondAttribute="trailing" id="7r7-M5-qDw"/>
+                            <constraint firstItem="WnS-IP-iw2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Mdg-ys-q3O"/>
+                            <constraint firstItem="WnS-IP-iw2" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Q1z-S4-IPd"/>
+                            <constraint firstItem="WnS-IP-iw2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="S1D-zH-QT9"/>
+                            <constraint firstItem="bra-vG-iaz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="jhn-iU-Bqm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bra-vG-iaz" secondAttribute="trailing" id="sY5-FS-tBt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dynamicImageView" destination="WnS-IP-iw2" id="6xH-Nf-ecI"/>
+                        <outlet property="skipButton" destination="bra-vG-iaz" id="PqT-Uw-m9e"/>
+                        <segue destination="Bdj-aU-u0g" kind="presentation" identifier="SplashToMain" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="WBu-Ye-p3A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="245" y="337"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="wKK-qM-20q">
+            <objects>
+                <viewController id="Bdj-aU-u0g" customClass="ITDCMainViewController" customModule="WWITDC_iOS_Client_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4DA-qf-Qva"/>
+                        <viewControllerLayoutGuide type="bottom" id="w4f-MV-zgq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tih-dx-ydV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VHT-dc-NEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="898" y="337"/>
+        </scene>
+    </scenes>
+</document>

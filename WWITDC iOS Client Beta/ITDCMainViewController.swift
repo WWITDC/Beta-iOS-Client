@@ -16,7 +16,7 @@ class ITDCMainViewController: UIViewController {
     }
 
     func downloadDynamicLaunchImage(){
-        NSUD.setBool(true, forKey: HasLaunchImage)
+        SUD.set(true, forKey: HasLaunchImage)
     }
 
     override func didReceiveMemoryWarning() {

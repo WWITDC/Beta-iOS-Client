@@ -9,40 +9,46 @@
 import Foundation
 import UIKit
 
-let NSUD = NSUserDefaults.standardUserDefaults()
+/// Standard User Defaults
+let SUD = UserDefaults.standard()
 let HasLaunchImage = "hasDynamicImage"
 let LaunchImageValidatingDate = "dynamicImageStartDisplayingDate"
 let LaunchImageExpiringDate = "dynamicImageStopDisplayingDate"
 let LaunchImageHyperlink = "dynamicHyperLink"
-let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-let publicFileManager = NSFileManager.defaultManager()
+let cachesDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+/// Default File Manager
+let DFM = FileManager.default()
 let logFilePath = cachesDirectory + "/log.txt"
 
-func log(message: String){
-    if publicFileManager.fileExistsAtPath(logFilePath){
+func log(_ message: String){
+    if DFM.fileExists(atPath: logFilePath){
         if let outputStream = NSOutputStream(toFileAtPath: logFilePath, append: true){
-            outputStream.write(message)
-            outputStream.close()
+            do{
+                try outputStream.write(message)
+                outputStream.close()
+            } catch {
+                NSLog("WWITDC iOS Client Beta Log Error")
+            }
         }
     }
 }
 
 extension UIViewController{
     func cleanUp() {
-        if NSUD.boolForKey(HasLaunchImage){
+        if SUD.bool(forKey: HasLaunchImage){
             let imagePath = cachesDirectory + "/launchImage"
-            if publicFileManager.fileExistsAtPath(imagePath) {
+            if DFM.fileExists(atPath: imagePath) {
                 do {
-                    try publicFileManager.removeItemAtPath(imagePath)
-                    NSUD.setBool(false, forKey: HasLaunchImage)
+                    try DFM.removeItem(atPath: imagePath)
+                    SUD.set(false, forKey: HasLaunchImage)
                 } catch {
                     log("Error when removing launch image\n")
                 }
             }
         }
-        if publicFileManager.fileExistsAtPath(logFilePath){
+        if DFM.fileExists(atPath: logFilePath){
             do {
-                try publicFileManager.removeItemAtPath(logFilePath)
+                try DFM.removeItem(atPath: logFilePath)
             } catch {
                 log("Error when removing launch iamge\n")
             }
@@ -52,25 +58,28 @@ extension UIViewController{
 
 
 // Rob - Stack Overflow
+// Converted By Apollo to modern Swift style
 extension NSOutputStream {
-    func write(string: String, encoding: NSStringEncoding = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> Bool{
-        if let data = string.dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion) {
-            var bytes = UnsafePointer<UInt8>(data.bytes)
-            var bytesRemaining = data.length
+    enum NSOutputStreamError: ErrorProtocol{
+        case noBytesWritten
+        case noData
+    }
+    func write(_ string: String, encoding: String.Encoding = String.Encoding.utf8, allowLossyConversion: Bool = true) throws{
+        if let data = string.data(using: encoding, allowLossyConversion: allowLossyConversion) {
+            var bytes = UnsafePointer<UInt8>((data as NSData).bytes)
+            var bytesRemaining = data.count
             var totalBytesWritten = 0
-
             while bytesRemaining > 0 {
                 let bytesWritten = self.write(bytes, maxLength: bytesRemaining)
                 if bytesWritten < 0 {
-                    return false
+                    throw NSOutputStreamError.noBytesWritten
                 }
-
                 bytesRemaining -= bytesWritten
                 bytes += bytesWritten
                 totalBytesWritten += bytesWritten
             }
-            return true
+        } else {
+            throw NSOutputStreamError.noData
         }
-        return false
     }
 }

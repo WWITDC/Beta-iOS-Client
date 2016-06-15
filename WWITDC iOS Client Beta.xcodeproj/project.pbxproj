@@ -105,12 +105,13 @@
 			attributes = {
 				CLASSPREFIX = ITDC;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = WWITDC;
 				TargetAttributes = {
 					523AC2FF1CD8FCD100C3105A = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 2H866F22W7;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -284,6 +285,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wwitdc.apollo.WWITDC-iOS-Client-Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -300,6 +302,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wwitdc.apollo.WWITDC-iOS-Client-Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
